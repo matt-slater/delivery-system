@@ -1,0 +1,20 @@
+<h3>Undelivered Deliverables</h3>
+<p>This list updates in real time as deliveries are added, updated and delivered.</p>
+<table class="table table-sm table-hover">
+	<thead>
+		<tr>
+			<th>Reference No.</th>
+			<th>Origin</th>
+			<th>Destination</th>
+			<th>Delivered?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let delivery of deliveries" (click)="onSelect(delivery)">
+			<td>{{delivery.id}}</td>
+			<td>{{delivery.origin}}</td>
+			<td>{{delivery.destination}}</td>
+			<td>{{delivery.delivered}}</td>
+		</tr>
+	</tbody>
+</table>

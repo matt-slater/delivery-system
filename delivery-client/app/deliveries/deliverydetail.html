@@ -1,0 +1,11 @@
+<div *ngIf="delivery">
+	<h3>Delivery Detail:</h3>
+
+	<ul class="list-group">
+		<li class="list-group-item"><label>ID:</label> {{delivery.id}}</li>
+		<li class="list-group-item"><label>Origin:</label> {{delivery.origin}}</li>
+		<li class="list-group-item"><label>Destination:</label> {{delivery.destination}}</li>
+		<li class="list-group-item"><label>Delivered:</label> {{delivery.delivered}}</li>
+	</ul>
+	<button type="button" class="btn btn-primary" (click)="gotoDeliveries()">Back</button>
+</div>

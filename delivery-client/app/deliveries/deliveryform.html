@@ -1,0 +1,14 @@
+<h3>Submit a Delivery</h3>
+<form (ngSubmit)="submitDelivery()">
+	<fieldset class="form-group">
+		<label for="origin">Origin Address:</label>
+		<input [(ngModel)]="model.origin" name="origin" class="form-control" type="text" id="origin" placeholder="123 Fake St" required>
+
+	</fieldset>
+	<fieldset class="form-group">
+		<label for="destination">Destination Address:</label>
+		<input [(ngModel)]="model.destination" name="destination" class="form-control" type="text" id="destination" placeholder="5555 Nonexistent Way"/>
+	</fieldset>
+
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
