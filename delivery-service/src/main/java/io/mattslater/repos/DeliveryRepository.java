@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by dewdmcmann on 6/29/16.
- */
+
 @RepositoryRestResource
 public interface DeliveryRepository extends PagingAndSortingRepository<Delivery, Long> {
 
