@@ -1,15 +1,18 @@
 package io.mattslater;
 
+import io.mattslater.messaging.DeliveryServiceChannels;
 import io.mattslater.model.Delivery;
 import io.mattslater.repos.DeliveryRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
+@EnableBinding(DeliveryServiceChannels.class)
 @EnableEurekaClient
 @SpringBootApplication
 public class DeliveryServiceApplication {
