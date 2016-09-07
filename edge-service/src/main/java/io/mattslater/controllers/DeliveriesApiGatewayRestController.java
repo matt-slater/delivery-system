@@ -3,6 +3,7 @@ package io.mattslater.controllers;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.mattslater.messaging.EdgeServiceChannels;
 import io.mattslater.model.Delivery;
+import io.mattslater.model.SubmittedDelivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Resources;
@@ -25,30 +26,24 @@ import java.util.stream.Collectors;
 @RequestMapping("/deliveries")
 public class DeliveriesApiGatewayRestController {
 
-    private final RestTemplate restTemplate;
-    private final MessageChannel out;
+    private final DeliveryReader deliveryReader;
+    private final DeliveryWriter deliveryWriter;
 
     @Autowired
-    public DeliveriesApiGatewayRestController(RestTemplate restTemplate, EdgeServiceChannels edgeServiceChannels) {
-        this.restTemplate = restTemplate;
-        this.out = edgeServiceChannels.output();
+    public DeliveriesApiGatewayRestController(DeliveryReader deliveryReader, DeliveryWriter deliveryWriter) {
+        this.deliveryReader = deliveryReader;
+        this.deliveryWriter = deliveryWriter;
     }
 
     @HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping(value = "/json", method = RequestMethod.GET)
     public Collection<Delivery> deliveries() {
-        ParameterizedTypeReference<Resources<Delivery>> ptr =
-                new ParameterizedTypeReference<Resources<Delivery>>() {
-                };
 
-        ResponseEntity<Resources<Delivery>> responseEntity =
-                this.restTemplate.exchange("http://delivery-service/deliveries",
-                        HttpMethod.GET, null, ptr);
 
-        return responseEntity
-                .getBody()
+        return deliveryReader.read()
+
                 .getContent()
-                .stream()
+               .stream()
                 .collect(Collectors.toList());
     }
 
@@ -57,8 +52,7 @@ public class DeliveriesApiGatewayRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void write(@RequestBody Delivery d) {
-        Message<Delivery> message = MessageBuilder.withPayload(d).build();
-        this.out.send(message);
+    public void write(@RequestBody SubmittedDelivery d) {
+        this.deliveryWriter.write(d);
     }
 }

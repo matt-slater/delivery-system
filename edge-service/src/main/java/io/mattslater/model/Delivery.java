@@ -1,17 +1,24 @@
 package io.mattslater.model;
 
+import java.io.Serializable;
+
 /**
  * Created by dewdmcmann on 8/28/16.
  */
-public class Delivery {
+public class Delivery implements Serializable {
+
 
     private String origin;
     private String destination;
     private boolean delivered;
 
+    public Delivery() {
+    }
+
     public String getOrigin() {
         return origin;
     }
+
 
     public void setOrigin(String origin) {
         this.origin = origin;
@@ -32,4 +39,8 @@ public class Delivery {
     public void setDelivered(boolean delivered) {
         this.delivered = delivered;
     }
+
+
+
+
 }

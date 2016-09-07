@@ -1,7 +1,7 @@
 package io.mattslater.model;
 
 /**
- * Created by dewdmcmann on 7/12/16.
+ * Created by dewdmcmann on 9/7/16.
  */
 public class SubmittedDelivery {
 
