@@ -23,7 +23,7 @@ public class DeliveryServiceApplication {
 		return args -> {
 			dr.deleteAll();
 			dr.save(new Delivery("555 Fake St", "310 E 82nd St"));
-			dr.save(new Delivery("410 E 38th St", "14 Butt Avenue"));
+			dr.save(new Delivery("410 E 38th St", "14 Not Real Avenue"));
 			dr.save(new Delivery("1000 West End Ave", "Rivergate Vet Clinic"));
 			dr.save(new Delivery("666 Bocephus Way", "123 Rue de Faux"));
 
